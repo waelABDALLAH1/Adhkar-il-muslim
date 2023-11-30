@@ -15,15 +15,17 @@ class App extends StatelessWidget {
       home: HomeScreen(),
       theme:ThemeData(
         appBarTheme: AppBarTheme(
+          backgroundColor: Colors.green,
           centerTitle: true ,
           elevation: 0,
           titleTextStyle: TextStyle(
             fontFamily: 'tajawal',
-            fontSize: 18.0,
+            fontSize: 20.0,
           )
 
 
-        )
+        ),
+        scaffoldBackgroundColor: Colors.white,
       )
     );
   }
