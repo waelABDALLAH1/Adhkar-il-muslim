@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:adhkar/Screens/section_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../models/section_model.dart';
@@ -32,35 +33,43 @@ class _HomeScreenState extends State<HomeScreen> {
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
             itemBuilder: (context, index) =>
-                buildSectionItem(text: sections[index].name!),
+                buildSectionItem(model : sections[index]),
             itemCount: sections.length,
           )),
     );
   }
 
-  Widget buildSectionItem({required String text}) {
-    return Container(
-        margin: const EdgeInsets.only(top: 12.0),
-        width: double.infinity,
-        height: 100,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-              Colors.lightGreenAccent,
-              Colors.green,
-              Colors.lightGreen,
-            ])),
-        child: Center(
-            child: Text(
-          "$text",
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        )));
+  Widget buildSectionItem({required SectionModel model }) {
+    return InkWell(
+      onTap: (){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> SectionDetailScreen(id :model.id! , )));
+
+
+      },
+      child: Container(
+          margin: const EdgeInsets.only(top: 12.0),
+          width: double.infinity,
+          height: 100,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.0),
+              gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                Colors.lightGreenAccent,
+                Colors.green,
+                Colors.lightGreen,
+              ])),
+          child: Center(
+              child: Text(
+            "${model.name}",
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ))),
+    );
   }
 
   loadSections() async {
